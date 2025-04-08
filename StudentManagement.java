@@ -1,0 +1,392 @@
+package student_manag;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+public class StudentManagement 
+{
+	static Student student;
+	static ArrayList <Mock> listMock = new ArrayList<Mock>();
+	
+	public static void start()
+	{
+		Scanner scanner = new Scanner (System.in);
+		for ( ; ; )
+		{
+			System.out.println();
+			System.out.println("Welcome");
+			System.out.println();
+			System.out.println("1. Student ");
+			System.out.println("2. HR");
+			System.out.println();
+			
+			System.out.println("Enter an option");
+			int option = scanner.nextInt();
+			
+			switch(option)
+			{
+				case 1:
+				{
+					studentHomePage();
+					break;
+				}
+				case 2:
+				{
+					mockRating();
+					break;
+				}
+				case 3:
+				{
+					requirement();
+					break;
+				}
+				case 4:
+				{
+					return;
+				}
+				default:
+				{
+				System.out.println("Invalid Option");
+				}
+			}
+		}
+		
+	    }
+	 
+	private static void studentHomePage()
+	{
+		for (; ; )
+		{
+			System.out.println();
+			System.out.println("Student MODULE");
+			System.out.println();
+			System.out.println("1. Create Profile ");
+			System.out.println("2. Profile ");
+			System.out.println("3. Mock Ratings");
+			System.out.println("4. Requirement");
+			System.out.println("5. Logout");
+			System.out.println();
+			
+			System.out.print("Enter an option : ");
+			int opt = new Scanner(System.in).nextInt();
+			switch(opt)
+			{
+				case 1:
+				{
+					createProfile();
+					break;
+				}
+				case 2:
+				{
+					viewProfile();
+					break;
+				}
+				case 3:
+				{
+					viewMockRating();
+					break;
+				}
+				case 4:
+				{
+					viewRequirement();
+					break;
+				}
+				case 5:
+				{
+					return;
+				}
+				default:
+				{
+					System.out.println("Invalid option");
+				}
+			}
+		}
+	}
+	
+	private static void hrHomePage()
+	{
+		if(student == null)
+		{
+			System.out.println("Student data is not Present");
+		}
+		for( ; ; )
+		{
+			System.out.println("HR MODULE");
+			System.out.println();
+			System.out.println("1. View all Students");
+			System.out.println("2. Mock Rating");
+			System.out.println("3. Requirement");
+			System.out.println("4. Logout");
+			System.out.println();
+			
+			System.out.println("Enter an option : ");
+			int opt = new Scanner(System.in).nextInt();
+			switch (opt)
+			{
+			case 1:
+				{
+					viewAllStudent();
+					break;
+				}
+				case 2:
+				{
+					mockRating();
+					break;
+				}
+				case 3:
+				{
+					requirement();
+					break;
+				}
+				case 4:
+				{
+					return;
+				}
+				default:
+				{
+					System.out.println("Invalid Option");
+				}
+			
+			}
+		}
+	}
+	private static void requirement()
+	{
+		//
+	}
+	
+	private static void mockRating()
+	{
+		for (; ; )
+		{
+			System.out.println("Mock Module");
+			System.out.println();
+			System.out.println("1. Add Mock");
+			System.out.println("2. View all Mock");
+			System.out.println("3. Exit");
+			System.out.println("Enter an option");
+			
+			int opt = new Scanner(System.in).nextInt();
+			
+			switch(opt)
+			{
+				case 1:
+				{
+					addMock();
+					break;
+				}
+				case 2:
+				{
+					viewAllMock();
+					break;
+				}
+				case 3:
+				{
+					return;
+				}
+				default:
+				{
+					System.out.println("Invalid Option");
+				}
+			}
+		}
+	}
+	
+	private static void viewAllMock()
+	{
+		System.out.println();
+		System.out.println("All Mock");
+		for(Mock ele : listMock)
+		{
+			ele.displayMock();
+		}
+		
+	}
+	
+	private static void addMock()
+	{
+		System.out.println();
+		System.out.println("Add Mock Module");
+		System.out.println();
+		
+		System.out.println("Date : ");
+		String date = new Scanner(System.in).next();
+		
+		System.out.print("Trainer name : ");
+		String trainerName = new Scanner(System.in).next();
+		
+		System.out.println("Subject : ");
+		String sub = new Scanner(System.in).next();
+		
+		System.out.print("Rating : ");
+		String rating = new Scanner(System.in).next();
+		
+		Mock mock = new Mock(trainerName, sub, date, rating);
+		listMock.add(mock);
+	}
+	
+	private static void viewAllStudent()
+	{
+		student.displayStudent();
+	}
+	
+	private static void viewRequirement()
+	{
+		System.out.println("req will implement soon");		
+	}
+	
+	private static void viewMockRating()
+	{
+		if(student == null)
+		{
+			System.out.println("Create your Account first");
+			return;
+		}
+		
+		System.out.println("All mock ratings");
+		for(Mock ele : listMock)
+		{
+			ele.displayMock();
+		}
+	
+	}
+	
+	private static void viewProfile()
+	{
+		if(student == null)
+		{
+			System.out.println("Create your account first");
+			return ;
+		}
+		
+		System.out.println("Student profile Module");
+		System.out.println();
+		student.displayStudent();
+		
+		System.out.println();
+		
+		System.out.println("Do you want to edit something : ");
+		@SuppressWarnings("resource")
+		String resp = new Scanner(System.in).next();
+		if(resp.equalsIgnoreCase("Yes"))
+		{
+			editStudentProfile();
+		}
+	}
+	
+	private static void editStudentProfile()
+	{
+		for( ; ; )
+		{
+			System.out.println();
+			System.out.println("Edit student Info");
+			System.out.println("1. Name ");
+			System.out.println("2. Email ");
+			System.out.println("3. Contact ");
+			System.out.println("4. Address ");
+			System.out.println("5. Change Pin ");
+			System.out.println("6. Exit ");
+			
+			System.out.println();
+			
+			int opt = new Scanner(System.in).nextInt();
+			switch(opt)
+			{
+				case 1:
+				{
+					System.out.println("New Name : ");
+					String newName = new Scanner(System.in).nextLine();
+					System.out.println("Pin : ");
+					int userPin = new Scanner(System.in).nextInt();
+					if(userPin == student.getPin())
+					{
+						student.setName(newName);
+					}
+					else
+					{
+						System.out.println("Invalid Pin");
+					}
+					break;
+				}
+				case 2:
+				{
+					System.out.print("New Email");
+					String newEmail = new Scanner(System.in).nextLine();
+					
+					System.out.println("Pin : ");
+					int userPin = new Scanner(System.in).nextInt();
+					if(userPin == student.getPin())
+					{
+						student.setEmail(newEmail);
+					}
+					else
+					{
+						System.out.println("Invalid Pin");
+					}
+					break;
+				}
+				
+				case 3:
+				{
+					System.out.println("New Contact : ");
+					long newContact = new Scanner(System.in).nextLong();
+					System.out.println("Pin : ");
+					int userPin = new Scanner(System.in).nextInt();
+					if(userPin == student.getPin())
+					{
+						student.setContact(newContact);
+					}
+					else
+					{
+						System.out.println("Invalid Pin");
+					}
+					break;
+				}
+				
+				case 5:
+				{
+					System.out.println("New Pin");
+					int newPin = new Scanner(System.in).nextInt();
+					System.out.println("Pin : ");
+					int userPin = new Scanner(System.in).nextInt();
+					if(userPin == student.getPin())
+					{
+						student.setPin(newPin);
+					}
+					else
+					{
+						System.out.println("Invalid Pin ");
+					}
+					break;
+				}
+				
+				case 6:
+				{
+					System.out.println();
+					return;
+				}
+			}
+		}
+	}
+	
+	private static void createProfile()
+	{
+		System.out.println("Create Profile Module");
+		System.out.println();
+		System.out.println("Pin : ");
+		int pin = new Scanner(System.in).nextInt();
+		
+		System.out.println("Name : ");
+		String name = new Scanner(System.in).nextLine();
+		
+		System.out.println("Email : ");
+		String email = new Scanner(System.in).next();
+		
+		System.out.println("Contact : ");
+		long contact =  new Scanner(System.in).nextLong();
+		
+		System.out.println("Address : ");
+		String address = new Scanner(System.in).nextLine();
+		
+		student = new Student(pin, name , email, contact, address);
+	}
+}
