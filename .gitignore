@@ -1,8 +1,8 @@
+target/
 *.class
 *.bak
-target/
-bin/
-out/
+*.db
 .idea/
 *.iml
 .vscode/
+.github/modernize/
