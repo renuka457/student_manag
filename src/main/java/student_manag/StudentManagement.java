@@ -1,10 +1,11 @@
 package student_manag;
-
+import student_manag.dao.StudentDAO;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class StudentManagement 
 {
 	static Student student;
+	static StudentDAO studentDAO = new StudentDAO();
 	static ArrayList <Mock> listMock = new ArrayList<Mock>();
 	
 	public static void start()
@@ -226,7 +227,7 @@ public class StudentManagement
 	
 	private static void viewAllStudent()
 	{
-		student.displayStudent();
+		studentDAO.printAllStudents();
 	}
 	
 	private static void viewRequirement()
@@ -388,5 +389,6 @@ public class StudentManagement
 		String address = new Scanner(System.in).nextLine();
 		
 		student = new Student(pin, name , email, contact, address);
+		studentDAO.saveStudent(student);
 	}
 }

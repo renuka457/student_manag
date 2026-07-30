@@ -1,8 +1,33 @@
+# Build Artifacts
 target/
+build/
+bin/
+
+# Compiled Java class files
 *.class
-*.bak
+
+# SQLite database files (local data persistence)
 *.db
+
+# IntelliJ IDEA
 .idea/
 *.iml
+*.iws
+*.ipr
+
+# VS Code
 .vscode/
-.github/modernize/
+
+# Eclipse
+.metadata/
+.classpath
+.project
+.settings/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+*.log
